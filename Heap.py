@@ -69,5 +69,40 @@ class Heap:
     def print_heap(self):
         print(self.heap)
 
+
     def print_heap2(self):
-        pass
+        counter = 1
+        summ = 0
+
+        while(summ <= len(self.heap)):
+            print(self.heap[summ : summ + counter])
+            summ += counter
+            counter *= 2
+
+
+    def print_heap3(self, max_consol_width=160):
+        length = max_consol_width / 4
+        counter = 1
+        sum = 0
+        line = ""
+
+        while(sum <= len(self.heap)):
+            for index in range(counter):
+                if (sum + index >= len(self.heap)): break
+                line += (self.generate_string(length, " ") + "|" + self.generate_string(length, "-") +
+                         str(self.heap[sum + index]) +
+                         self.generate_string(length, "-") + "|" + self.generate_string(length, " "))
+                
+            print(line)
+
+            sum += counter
+            counter *= 2
+            length /= 2
+            line = ""
+
+
+    def generate_string(self, length, sign="="):
+        string = ""
+        for i in range(int(length)):
+            string += sign
+        return string

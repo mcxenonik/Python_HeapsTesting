@@ -2,9 +2,6 @@ from random import sample
 import sys
 
 from Heap import Heap
-from Heap1 import Heap1
-from Heap2 import Heap2
-from Heap3 import Heap3
 
 if __name__ == "__main__":
     # sys.setrecursionlimit(100000)

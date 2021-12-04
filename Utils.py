@@ -32,7 +32,7 @@ class Utils():
 
 
     def _create_heap(heap, function_name, list_of_elements):
-        if (function_name == "createHeap"):
+        if (function_name == "createHeap" or function_name == "betterCreateHeap"):
             created_heap = heap()
         else:
             created_heap = heap().createHeap(list_of_elements)
@@ -63,11 +63,11 @@ class Utils():
     def _measure_time(heap, function, argument):
         gc_old = gc.isenabled()
         gc.disable()
-
+        
         start = time.process_time()
         function(heap, argument)
         stop = time.process_time()
-
+        
         if (gc_old): 
             gc.enable()
 

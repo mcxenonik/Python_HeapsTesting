@@ -4,7 +4,6 @@ from Heap import Heap
 from Utils import Utils
 
 
-
 def run(list_of_lists):
     Utils.start_measurements(Heap, Heap.createHeap, list_of_lists)
 

@@ -108,7 +108,7 @@ class Heap:
             for index in range(counter):
                 if (sum + index >= len(self.heap)): break
                 line += (self._generateString(length, " ") + "|" + self._generateString(length, "-") +
-                         str(self.heap[sum + index]) +
+                         self._formatValue(self.heap[sum + index]) +
                          self._generateString(length, "-") + "|" + self._generateString(length, " "))
                 
             print(line)
@@ -126,3 +126,14 @@ class Heap:
             string += sign
 
         return string
+
+
+    def _formatValue(self, value):
+        strValue = str(value)
+
+        if (len(strValue) == 1):
+            return " " + strValue + " "
+        elif (len(strValue) == 2):
+            return strValue[0] + " " + strValue[1]
+        elif (len(strValue) == 3):
+            return strValue

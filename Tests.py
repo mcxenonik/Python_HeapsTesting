@@ -7,7 +7,7 @@ from Heap2 import Heap2
 from Heap3 import Heap3
 
 if __name__ == "__main__":
-    sys.setrecursionlimit(100000)
+    # sys.setrecursionlimit(100000)
  
     print("TEST ARR:")
     arr = sample(range(1, 99), 31)

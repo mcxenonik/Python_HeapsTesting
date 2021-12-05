@@ -1,3 +1,5 @@
+from math import ceil, log2
+
 class Heap:
     def __init__(self, values=None):
         self.heap = []
@@ -77,7 +79,7 @@ class Heap:
 
     def betterCreateHeap(self, values):
         if (values is not None):
-            self.heap = values
+            self.heap = values.copy()
             for index in range(int((len(self.heap) - 2) / 2), -1, -1):          # ODTWARZAMY KOPIEC OD PRZEDOSTATNIEGO POZIOMU W GÓRĘ
                 self._downHeap(index)
 
@@ -98,25 +100,48 @@ class Heap:
             counter *= 2
 
 
-    def printHeap3(self, max_consol_width=160):
-        length = max_consol_width / 4
-        counter = 1
-        sum = 0
-        line = ""
+    def printHeap3(self, max_consol_width=128):
+        level = ceil(log2(len(self.heap) + 1))
+        text_heap = []
+        valueLine = ""
+        padLine = ""
 
-        while(sum <= len(self.heap)):
-            for index in range(counter):
-                if (sum + index >= len(self.heap)): break
-                line += (self._generateString(length, " ") + "|" + self._generateString(length, "-") +
-                         self._formatValue(self.heap[sum + index]) +
-                         self._generateString(length, "-") + "|" + self._generateString(length, " "))
-                
+        while(level != 0):
+            left = 2**(level - 1) - 1
+            right = 2**level - 1
+            for elementIndex in range(left, right):
+                if (elementIndex >= len(self.heap)):
+                    continue
+                else:
+                    pad = ((max_consol_width / (left + 1)) - 4) / 2
+
+                    valueLine += (self._generateString(pad, " ") + 
+                                  self._formatValue(self.heap[elementIndex]) + 
+                                  self._generateString(pad, " "))
+
+                    if (elementIndex % 2 != 0):
+                        sign = " "                       
+                        sign2 = "/"
+                        sign3 = "-"
+                    else:
+                        sign = "-"                       
+                        sign2 = "\\"
+                        sign3 = " "
+                        
+                    padLine += (self._generateString(pad, sign) + 
+                                " " + " " + sign2 + " " +
+                                self._generateString(pad, sign3))
+
+            text_heap.append(valueLine)
+            text_heap.append(padLine)
+            valueLine = ""
+            padLine = ""
+            level -= 1
+
+        text_heap.pop()
+        text_heap.reverse()
+        for line in text_heap:
             print(line)
-
-            sum += counter
-            counter *= 2
-            length /= 2
-            line = ""
 
 
     def _generateString(self, length, sign="="):
@@ -132,8 +157,10 @@ class Heap:
         strValue = str(value)
 
         if (len(strValue) == 1):
-            return " " + strValue + " "
+            return " " + " " + strValue + " "
         elif (len(strValue) == 2):
-            return strValue[0] + " " + strValue[1]
+            return " " + strValue + " "
         elif (len(strValue) == 3):
+            return " " + strValue
+        elif (len(strValue) == 4):
             return strValue

@@ -109,15 +109,12 @@ class Heap:
         while(level != 0):
             left = 2**(level - 1) - 1
             right = 2**level - 1
+            
             for elementIndex in range(left, right):
                 if (elementIndex >= len(self.heap)):
-                    continue
+                    break
                 else:
                     pad = ((max_consol_width / (left + 1)) - 4) / 2
-
-                    valueLine += (self._generateString(pad, " ") + 
-                                  self._formatValue(self.heap[elementIndex]) + 
-                                  self._generateString(pad, " "))
 
                     if (elementIndex % 2 != 0):
                         sign = " "                       
@@ -127,10 +124,15 @@ class Heap:
                         sign = "-"                       
                         sign2 = "\\"
                         sign3 = " "
-                        
-                    padLine += (self._generateString(pad, sign) + 
-                                " " + " " + sign2 + " " +
-                                self._generateString(pad, sign3))
+
+                    valueLine += (self._generateString(pad, " ") + 
+                                  self._formatValue(self.heap[elementIndex]) + 
+                                  self._generateString(pad, " "))
+                    
+                    if (elementIndex != 0):  
+                        padLine += (self._generateString(pad, sign) + 
+                                    " " + " " + sign2 + " " +
+                                    self._generateString(pad, sign3))
 
             text_heap.append(valueLine)
             text_heap.append(padLine)
@@ -138,7 +140,6 @@ class Heap:
             padLine = ""
             level -= 1
 
-        text_heap.pop()
         text_heap.reverse()
         for line in text_heap:
             print(line)

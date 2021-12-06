@@ -100,21 +100,21 @@ class Heap:
             counter *= 2
 
 
-    def printHeap3(self, max_consol_width=128):
+    def printHeap3(self, max_consol_width=128):             # 128-135, 160-175, 192-207, 224-239 (16-31) | 128 (32-63)
         level = ceil(log2(len(self.heap) + 1))
         text_heap = []
         valueLine = ""
         padLine = ""
 
         while(level != 0):
-            left = 2**(level - 1) - 1
-            right = 2**level - 1
+            left_index = 2**(level - 1)
+            right_index = 2**level - 1
             
-            for elementIndex in range(left, right):
+            for elementIndex in range(left_index - 1, right_index):
                 if (elementIndex >= len(self.heap)):
                     break
                 else:
-                    pad = ((max_consol_width / (left + 1)) - 4) / 2
+                    pad = ((max_consol_width / (left_index)) - 4) / 2
 
                     if (elementIndex % 2 != 0):
                         sign = " "                       

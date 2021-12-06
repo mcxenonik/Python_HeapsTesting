@@ -22,7 +22,6 @@ class Heap3:
         elif child_index % 3 == 0:
             parent_index = child_index // 3
 
-        # if (parent_index != 0 and self.heap[child_index] > self.heap[parent_index]):            # MAX HEAP
         if (parent_index != 0 and self.heap[child_index] < self.heap[parent_index]):              # MIN HEAP                                       
             self.heap[child_index], self.heap[parent_index] = self.heap[parent_index],  self.heap[child_index]
             self._check(value)

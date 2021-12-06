@@ -1,4 +1,3 @@
-from math import log2
 from random import sample
 import sys
 
@@ -14,29 +13,37 @@ if __name__ == "__main__":
     arr = sample(range(1, 99), 31)
     print(arr)
 
+    print("================================")
+
     print("TEST HEAP:")
     test_heap = Heap()
     test_heap.createHeap(arr)
-    test_heap.printHeap()
     test_heap.printHeap3()
 
-    print("TEST HEAP2:")
-    test_heap2 = Heap()
-    test_heap2.betterCreateHeap(arr)
-    test_heap2.printHeap()
+    print("================================")
+
+    print("TEST HEAP(BC):")
+    test_heapBC = Heap()
+    test_heapBC.betterCreateHeap(arr)
+    test_heapBC.printHeap3()
+
+    print("================================")
+
+    print("TEST HEAP 2:")
+    test_heap2 = Heap2()
+    test_heap2.createHeap(arr)
     test_heap2.printHeap3()
 
     # print("================================")
 
-    # test2 = Heap2()
-    # test3 = Heap3()
-    # test4 = Heap4()
+    # print("TEST HEAP 3:")
+    # test_heap3 = Heap3()
+    # test_heap3.createHeap(arr)
+    # test_heap3.printHeap3()
 
-    # for i in arr:
-    #     test2.push(i)
-    #     test3.push(i)
-    #     test4.push(i)
+    # print("================================")
 
-    # test2.display()
-    # test3.display()
-    # test4.display()
+    # print("TEST HEAP 4:")
+    # test_heap4 = Heap4()
+    # test_heap4.createHeap(arr)
+    # test_heap4.printHeap3()

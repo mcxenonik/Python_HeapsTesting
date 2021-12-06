@@ -1,26 +1,16 @@
 from math import floor
+from Heap import Heap
 
 
-class Heap2:
+class Heap2(Heap):
     def __init__(self):
         self.heap = []
-        self.heap.append(0)
+    
 
-
-    def push(self, value):
-        self.heap.append(value)
-        self._check(value)
-
-
-    def _check(self, value):
-        child_index = self.heap.index(value)
-
-        parent_index = floor(child_index / 2)
-
-        # if (parent_index != 0 and self.heap[child_index] > self.heap[parent_index]):            # MAX HEAP
-        if (parent_index != 0 and self.heap[child_index] < self.heap[parent_index]):              # MIN HEAP                                       
-            self.heap[child_index], self.heap[parent_index] = self.heap[parent_index],  self.heap[child_index]
-            self._check(value)
+    def _upHeap(self, index):
+        if (index != 0 and self.heap[self._parent(index)] > self.heap[index]):                                      # MIN HEAP                                       
+            self.heap[index], self.heap[self._parent(index)] = self.heap[self._parent(index)], self.heap[index]
+            self._upHeap(self._parent(index))
 
 
     def display(self):

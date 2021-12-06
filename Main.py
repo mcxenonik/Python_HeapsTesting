@@ -14,13 +14,13 @@ def run(list_of_lists):
 
     plt.close()
 
-    # Utils.start_measurements(Heap, Heap.betterCreateHeap, list_of_lists)
+    Utils.start_measurements(Heap, Heap.betterCreateHeap, list_of_lists)
 
-    # Utils.start_measurements(Heap3, Heap3.betterCreateHeap, list_of_lists)
+    Utils.start_measurements(Heap3, Heap3.betterCreateHeap, list_of_lists)
 
-    # Utils.start_measurements(Heap4, Heap4.betterCreateHeap, list_of_lists)
+    Utils.start_measurements(Heap4, Heap4.betterCreateHeap, list_of_lists)
 
-    # plt.close()
+    plt.close()
 
     Utils.start_measurements(Heap, Heap.deleteTopElement, list_of_lists)
 

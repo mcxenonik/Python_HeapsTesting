@@ -12,7 +12,7 @@ if __name__ == "__main__":
 
     print("================================================================================================")
 
-    print("TEST HEAP:")
+    print("TEST HEAP 2:")
     test_heap = Heap()
     test_heap.createHeap(arr)
     test_heap.printHeap3()
@@ -55,3 +55,12 @@ if __name__ == "__main__":
     print("AFTER DELETE:")
     test_heap4.printHeap3()
     test_heap4.printHeap2()
+
+
+    # print("================================================================================================")
+
+    # print("TEST HEAP 5:")
+    # test_heap4 = Heap4()
+    # test_heap4.betterCreateHeap(arr)
+    # test_heap4.printHeap3()
+    # test_heap4.printHeap2()

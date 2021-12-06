@@ -39,7 +39,7 @@ class Heap:
             index = self._parent(index)
 
 
-    def _downHeap2(self, index):             # TYLKO DLA BINARNEGO !!!!!!!!!!!
+    def _downHeap(self, index):             # TYLKO DLA BINARNEGO !!!!!!!!!!!
         while (self._left(index) < len(self.heap)):                                              # DOPÓKI WARTOŚĆ RODZICA JEST WIĘKSZA ZAMIENIAJ ELEMENT Z MNIEJSZYM DZIECKIEM
             j = self._left(index)
 
@@ -53,7 +53,7 @@ class Heap:
             index = j
 
 
-    def _downHeap(self, index):
+    def _downHeap34(self, index):
         while (self._left(index) < len(self.heap)):                                             # DOPÓKI WARTOŚĆ RODZICA JEST WIĘKSZA ZAMIENIAJ ELEMENT Z MNIEJSZYM DZIECKIEM
             j = self._findMinChild(index)
 
@@ -228,6 +228,30 @@ class Heap3(Heap):
         super().__init__(3, values)
 
 
+    def deleteTopElement(self, arg=None):
+        if (self.heap):
+            root = self.heap[0]                 # ZAPISZ NAJMNIEJSZY ELEMENT
+            self.heap[0] = self.heap[-1]        # WSTAW DO KORZENIA OSTATNI ELEMENT
+            self.heap.pop()                     # USUŃ OSTATNI ELEMENT
+            self._downHeap34(0)                   # PRZENIEŚ ELEMENT Z KORZENIA NA WŁAŚCIWE MIEJSCE
+
+            return root                         # ZWRÓĆ ZAPISANY NAJMNIEJSZY ELEMENT
+        else:
+            return None
+
+
 class Heap4(Heap):
     def __init__(self, values=None):
         super().__init__(4, values)
+
+
+    def deleteTopElement(self, arg=None):
+        if (self.heap):
+            root = self.heap[0]                 # ZAPISZ NAJMNIEJSZY ELEMENT
+            self.heap[0] = self.heap[-1]        # WSTAW DO KORZENIA OSTATNI ELEMENT
+            self.heap.pop()                     # USUŃ OSTATNI ELEMENT
+            self._downHeap34(0)                   # PRZENIEŚ ELEMENT Z KORZENIA NA WŁAŚCIWE MIEJSCE
+
+            return root                         # ZWRÓĆ ZAPISANY NAJMNIEJSZY ELEMENT
+        else:
+            return None

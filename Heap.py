@@ -1,27 +1,28 @@
-from math import ceil, log2
+from math import ceil, log
+
 
 class Heap:
-    def __init__(self, values=None):
+    def __init__(self, d_ary=2, values=None):
         self.heap = []
+        self.d_ary = d_ary
 
         self.createHeap(values)
-        # self.betterCreateHeap(values)
 
 
     def __str__(self):
-        return "BinaryHeap"
+        return str(self.d_ary) + "-Heap"
 
 
     def _parent(self, index):
-        return int((index - 1) / 2)                 # ZWRÓĆ INDEKS RODZICA ELEMENTU O PODANYM INDEKSIE
+        return int((index - 1) / self.d_ary)                 # ZWRÓĆ INDEKS RODZICA ELEMENTU O PODANYM INDEKSIE
 
 
     def _left(self, index):
-        return int(2 * index + 1)                   # ZWRÓĆ INDEKS LEWEGO DZIECKA ELEMENTU O PODANYM INDEKSIE
+        return int(self.d_ary * index + 1)                   # ZWRÓĆ INDEKS LEWEGO DZIECKA ELEMENTU O PODANYM INDEKSIE
 
 
     def _right(self, index):
-        return int(2 * index + 2)                   # ZWRÓĆ INDEKS PRAWEGO DZIECKA ELEMENTU O PODANYM INDEKSIE
+        return int(self.d_ary * index + 2)                   # ZWRÓĆ INDEKS PRAWEGO DZIECKA ELEMENTU O PODANYM INDEKSIE
 
 
     def _upHeap(self, index):
@@ -30,7 +31,7 @@ class Heap:
             index = self._parent(index)
 
 
-    def _downHeap(self, index):
+    def _downHeap(self, index):             # TYLKO DLA BINARNEGO !!!!!!!!!!!
         while (self._left(index) < len(self.heap)):                                              # DOPÓKI WARTOŚĆ RODZICA JEST WIĘKSZA ZAMIENIAJ ELEMENT Z MNIEJSZYM DZIECKIEM
             j = self._left(index)
 
@@ -95,35 +96,49 @@ class Heap:
         summ = 0
 
         while(summ <= len(self.heap)):
+            if (summ >= len(self.heap)):
+                break
+
             print(self.heap[summ : summ + counter])
             summ += counter
-            counter *= 2
+            counter *= self.d_ary
 
 
-    def printHeap3(self, max_consol_width=128):             # 128-135, 160-175, 192-207, 224-239 (16-31) | 128 (32-63)
-        level = ceil(log2(len(self.heap) + 1))
+    def printHeap3(self, max_consol_width=128):                                                 # 128-135, 160-175, 192-207, 224-239 (16-31) | 128 (32-63)
+        level = ceil(log((self.d_ary - 1) * len(self.heap) + 1, self.d_ary))
         text_heap = []
         valueLine = ""
         padLine = ""
 
         while(level != 0):
-            left_index = 2**(level - 1)
-            right_index = 2**level - 1
+            sum_of_all_elements_to_level = int((self.d_ary**level - 1) / (self.d_ary - 1))
+            number_of_elements_on_level = self.d_ary**(level - 1)
+
+            right_element_index = sum_of_all_elements_to_level - 1
+            left_element_index = sum_of_all_elements_to_level - number_of_elements_on_level
             
-            for elementIndex in range(left_index - 1, right_index):
+            for elementIndex in range(left_element_index, sum_of_all_elements_to_level):
                 if (elementIndex >= len(self.heap)):
                     break
                 else:
-                    pad = ((max_consol_width / (left_index)) - 4) / 2
+                    pad = ((max_consol_width / (number_of_elements_on_level)) - 4) / 2
 
-                    if (elementIndex % 2 != 0):
-                        sign = " "                       
-                        sign2 = "/"
-                        sign3 = "-"
-                    else:
+                    if (elementIndex % self.d_ary == 0):
                         sign = "-"                       
                         sign2 = "\\"
                         sign3 = " "
+                    elif (elementIndex % self.d_ary == 1):
+                        sign = " "                       
+                        sign2 = "/"
+                        sign3 = "-"
+                    elif (elementIndex % self.d_ary == 2):
+                        sign = "-"                       
+                        sign2 = "/"
+                        sign3 = "-"
+                    elif (elementIndex % self.d_ary == 3):
+                        sign = "-"                       
+                        sign2 = "\\"
+                        sign3 = "-"
 
                     valueLine += (self._generateString(pad, " ") + 
                                   self._formatValue(self.heap[elementIndex]) + 
@@ -165,3 +180,13 @@ class Heap:
             return " " + strValue
         elif (len(strValue) == 4):
             return strValue
+
+
+class Heap3(Heap):
+    def __init__(self, values=None):
+        super().__init__(3, values)
+
+
+class Heap4(Heap):
+    def __init__(self, values=None):
+        super().__init__(4, values)

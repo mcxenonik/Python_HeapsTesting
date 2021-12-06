@@ -53,6 +53,21 @@ class Heap:
             index = j
 
 
+    def _downHeap23(self, index):
+        while (self._left(index) < len(self.heap)):
+            j = self.findMinChild(index)
+
+            # if (j + 1 < len(self.heap) and self.heap[j] > self.heap[j + 1]):
+            if (j + 1 < len(self.heap) and self.heap[j] > self.findMinChild(j + 1)):
+                j += 1
+
+            if (self.heap[index] < self.heap[j]):
+                break
+
+            self.heap[index], self.heap[j] = self.heap[j],  self.heap[index]
+            index = j
+
+
     def getTopElement(self):
         if (self.heap):
             return self.heap[0]

@@ -90,9 +90,10 @@ class Utils():
                 process_time = Utils._measure_time(created_heap, function, list_of_elements)
             else:
                 process_time = 0
+                print("BEF:", len(created_heap.heap))
                 for element in list_of_elements:
                     process_time += Utils._measure_time(created_heap, function, element)
-
+                print("AFT:", len(created_heap.heap))
             ypoints.append(process_time)
             xpoints.append(len(list_of_elements))
 

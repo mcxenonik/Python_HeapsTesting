@@ -26,11 +26,11 @@ class Heap:
 
     
     def _3child(self, index):
-        return int(self.d_ary * index + 3)
+        return int(self.d_ary * index + 3)                   # ZWRÓĆ INDEKS TRZECIEGO DZIECKA ELEMENTU O PODANYM INDEKSIE
 
 
-    def _4child(self, index):
-        return int(self.d_ary * index + 4)
+    def _4child(self, index):                                
+        return int(self.d_ary * index + 4)                   # ZWRÓĆ INDEKS CZWARTEGO DZIECKA ELEMENTU O PODANYM INDEKSIE
 
 
     def _upHeap(self, index):
@@ -39,7 +39,7 @@ class Heap:
             index = self._parent(index)
 
 
-    def _downHeap(self, index):             # TYLKO DLA BINARNEGO !!!!!!!!!!!
+    def _downHeap2(self, index):             # TYLKO DLA BINARNEGO !!!!!!!!!!!
         while (self._left(index) < len(self.heap)):                                              # DOPÓKI WARTOŚĆ RODZICA JEST WIĘKSZA ZAMIENIAJ ELEMENT Z MNIEJSZYM DZIECKIEM
             j = self._left(index)
 
@@ -53,19 +53,37 @@ class Heap:
             index = j
 
 
-    def _downHeap23(self, index):
-        while (self._left(index) < len(self.heap)):
-            j = self.findMinChild(index)
-
-            # if (j + 1 < len(self.heap) and self.heap[j] > self.heap[j + 1]):
-            if (j + 1 < len(self.heap) and self.heap[j] > self.findMinChild(j + 1)):
-                j += 1
+    def _downHeap(self, index):
+        while (self._left(index) < len(self.heap)):                                             # DOPÓKI WARTOŚĆ RODZICA JEST WIĘKSZA ZAMIENIAJ ELEMENT Z MNIEJSZYM DZIECKIEM
+            j = self._findMinChild(index)
 
             if (self.heap[index] < self.heap[j]):
                 break
+            else:
+                self.heap[index], self.heap[j] = self.heap[j],  self.heap[index]
+                index = j
 
-            self.heap[index], self.heap[j] = self.heap[j],  self.heap[index]
-            index = j
+
+    def _findMinChild(self, index):
+        childs = []
+        childs_index = []
+
+        childs.append(self.heap[self._left(index)])
+        childs_index.append(self._left(index))
+
+        if (self._right(index) < len(self.heap)):
+            childs.append(self.heap[self._right(index)])
+            childs_index.append(self._right(index))
+
+        if(self.d_ary >= 3 and self._3child(index) < len(self.heap)):
+            childs.append(self.heap[self._3child(index)])
+            childs_index.append(self._3child(index))
+
+        if(self.d_ary == 4 and self._4child(index) < len(self.heap)):
+            childs.append(self.heap[self._4child(index)])
+            childs_index.append(self._4child(index))
+
+        return childs_index[childs.index(min(childs))]
 
 
     def getTopElement(self):
@@ -203,16 +221,6 @@ class Heap:
             return " " + strValue
         elif (len(strValue) == 4):
             return strValue
-
-
-    def findMinChild(self, index):
-        childs = []
-        childs.append(self._left(index))
-        childs.append(self._right(index))
-        childs.append(self._3child(index))
-        childs.append(self._4child(index))
-
-        return min(childs)
 
 
 class Heap3(Heap):

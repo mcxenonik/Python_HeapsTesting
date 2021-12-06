@@ -30,6 +30,6 @@ def run(list_of_lists):
 
     
 if __name__ == "__main__":
-    list_of_lists = Utils.generate_list_of_lists(1000, 200000, 5000)
+    list_of_lists = Utils.generate_list_of_lists(500000, 1000000, 5000)
 
     run(list_of_lists)

@@ -24,6 +24,14 @@ class Heap:
     def _right(self, index):
         return int(self.d_ary * index + 2)                   # ZWRÓĆ INDEKS PRAWEGO DZIECKA ELEMENTU O PODANYM INDEKSIE
 
+    
+    def _3child(self, index):
+        return int(self.d_ary * index + 3)
+
+
+    def _4child(self, index):
+        return int(self.d_ary * index + 4)
+
 
     def _upHeap(self, index):
         while (index != 0 and self.heap[self._parent(index)] > self.heap[index]):                                   # DOPÓKI WARTOŚĆ RODZICA JEST WIĘKSZA ZAMIENIAJ ELEMENT Z RODZICEM
@@ -180,6 +188,16 @@ class Heap:
             return " " + strValue
         elif (len(strValue) == 4):
             return strValue
+
+
+    def findMinChild(self, index):
+        childs = []
+        childs.append(self._left(index))
+        childs.append(self._right(index))
+        childs.append(self._3child(index))
+        childs.append(self._4child(index))
+
+        return min(childs)
 
 
 class Heap3(Heap):
